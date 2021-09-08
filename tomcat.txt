@@ -1,0 +1,42 @@
+1. from powershell in admin mode:
+a) docker pull tomcat
+b) from docker desktop note the image id
+c) docker run -p 8080:8080 -t <image id>
+e.g. docker run -p 8080:8080 -t ab1f0e1bb1a1
+d) http://localhost:8080/  will for now return 404 as no web application deployed by default
+
+
+----------------
+
+To deploy an application an image needs to be formed with war and which extends docker image of tomcat
+
+https://medium.com/@pra4mesh/deploy-war-in-docker-tomcat-container-b52a3baea448
+
+
+Each time code changes new docker image would have to be formed
+
+
+Steps to follow:
+
+1. Make Dockerfile
+2. make image
+
+docker image build -t vikas/tomcat_try2_war .
+
+3. run
+
+docker run -p 9090:8080 vikas/tomcat_try2_war
+
+3. Hit
+
+http://localhost:9090/try2
+
+
+For exploded:
+
+1. Make Dockerfile
+(notice that dir names to be written in destination also)
+
+1. docker image build -t vikas/tomcat_try2_exploded .
+2. docker run -p 9090:8080 vikas/tomcat_try2_exploded
+3. http://localhost:9090/try2_exploded
